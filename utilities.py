@@ -1,4 +1,3 @@
-import numpy as np
 import pygame
 import sys
 import math
@@ -6,6 +5,8 @@ import math
 RED = (255,0,0)
 BOARD_COLOR = (146,146,189)
 YELLOW = (255,255,0)
+WHITE = (230, 230, 230)
+GREY = (150, 150, 150)
 BACKGROUND_COLOR = (24,20,20)
 
 def get_next_open_row(board, rows, col):
