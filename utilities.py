@@ -51,6 +51,9 @@ def update_game_state(board, square_size, rows, player_number, x_position):
     if board[rows-1][col] == 0:
         row = get_next_open_row(board, rows, col)
         board[row][col] = player_number
+        return True
+
+    return False
 
 
 def check_game_state(board, rows, columns, player_number, player_color, myfont, message, screen):
