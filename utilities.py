@@ -1,5 +1,4 @@
 import pygame
-import sys
 import math
 
 RED = (255,0,0)
@@ -21,7 +20,6 @@ def tie(board):
             return False
 
     return True
-
 
 def winning_move(board, piece, rows, columns):
     for c in range(columns):
@@ -68,21 +66,6 @@ def check_game_state(board, rows, columns, player_number, player_color, myfont, 
         return True
     
     return False
-
-
-def update_mouse_movement(event, screen, square_size, width, radius, turn):
-    if event.type == pygame.QUIT:
-            sys.exit()
-
-    if event.type == pygame.MOUSEMOTION:
-        pygame.draw.rect(screen, BACKGROUND_COLOR, (0,0, width, square_size))
-        posx = event.pos[0]
-        if turn == 0:
-            pygame.draw.circle(screen, RED, (posx, int(square_size/2)), radius)
-        else: 
-            pygame.draw.circle(screen, YELLOW, (posx, int(square_size/2)), radius)
-    pygame.display.update()
-
 
 def draw_board(board, screen, rows, columns, square_size, radius, height):
     for c in range(columns):
