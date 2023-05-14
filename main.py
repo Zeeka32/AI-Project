@@ -50,22 +50,27 @@ def play():
             if event.type == pygame.QUIT:
                 sys.exit()
 
+            if event.type == pygame.MOUSEMOTION:
+                pygame.draw.rect(screen, BACKGROUND_COLOR, (0,0, width, SQUARESIZE))
+                posx = event.pos[0]
+                if turn == 0:
+                    pygame.draw.circle(screen, RED, (posx, int(SQUARESIZE/2)), RADIUS)
+                else: 
+                    pygame.draw.circle(screen, YELLOW, (posx, int(SQUARESIZE/2)), RADIUS)
             pygame.display.update()
 
-        # Player one's Turn
-        if turn == 0:
-            x_position = p1.run_algo(board)
-            valid = update_game_state(board, SQUARESIZE, ROWS, 1, x_position)
-            if valid:
-                game_over = check_game_state(board, ROWS, COLUMNS, 1, RED, myfont, "PLAYER 1 WINS!!", screen)
-                turn += 1
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                # Player one's Turn
+                if turn == 0:
+                    x_position = event.pos[0]
+                    valid = update_game_state(board, SQUARESIZE, ROWS, 1, x_position)
+                    if valid:
+                        game_over = check_game_state(board, ROWS, COLUMNS, 1, WHITE, myfont, "PLAYER 1 WINS!!", screen)
+                        turn += 1
 
-                print_board(board)
-                draw_board(board, screen, ROWS, COLUMNS, SQUARESIZE, RADIUS, height)
+                        print_board(board)
+                        draw_board(board, screen, ROWS, COLUMNS, SQUARESIZE, RADIUS, height)
 
-                pygame.time.wait(500)
-
-        
         # Player two's turn
         # remove event.pos[0] and replace it with the right value based on the AI's choice
         # 50 for COL0, 150 for COL1, 250 for COL3 and so on..
@@ -73,13 +78,11 @@ def play():
             x_position = p2.run_algo(board)
             valid = update_game_state(board, SQUARESIZE, ROWS, 2, x_position)
             if valid:
-                game_over = check_game_state(board, ROWS, COLUMNS, 2, YELLOW, myfont, "PLAYER 2 WINS!!", screen)
+                game_over = check_game_state(board, ROWS, COLUMNS, 2, WHITE, myfont, "PLAYER 2 WINS!!", screen)
                 turn -= 1
 
                 print_board(board)
                 draw_board(board, screen, ROWS, COLUMNS, SQUARESIZE, RADIUS, height)
-
-                pygame.time.wait(500)
 
                 AI = False
         
@@ -89,7 +92,6 @@ def play():
         if game_over:
             pygame.time.wait(3000)
                     
-
 
 def options():
     pygame.display.set_caption("Options")
