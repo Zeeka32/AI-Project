@@ -69,25 +69,66 @@ def play():
                     pygame.time.wait(3000)
 
 def options():
-    pass
+    pygame.display.set_caption("Options")
+    while True:
+
+        screen.fill(BACKGROUND_COLOR)
+
+        MENU_MOUSE_POSITION = pygame.mouse.get_pos()
+
+        OPTIONS_TEXT = myfont.render("OPTIONS", 1, WHITE)
+        PLAYER_ONE_TEXT = myfont.render("1P", 1, RED)
+        PLAYER_TWO_TEXT = myfont.render("2P", 1, YELLOW)
+
+        P1EASY_DIFFICULTY = Button(image=None, pos=(157, 250), text_input="EASY", font=myfont, base_color=RED, hovering_color=GREY)
+        P1MEDIUM_DIFFICULTY = Button(image=None, pos=(157, 350), text_input="MEDIUM", font=myfont, base_color=RED, hovering_color=GREY)
+        P1HARD_DIFFICULTY = Button(image=None, pos=(157, 450), text_input="HARD", font=myfont, base_color=RED, hovering_color=GREY)
+
+        P2EASY_DIFFICULTY = Button(image=None, pos=(557, 250), text_input="EASY", font=myfont, base_color=YELLOW, hovering_color=GREY)
+        P2MEDIUM_DIFFICULTY = Button(image=None, pos=(557, 350), text_input="MEDIUM", font=myfont, base_color=YELLOW, hovering_color=GREY)
+        P2HARD_DIFFICULTY = Button(image=None, pos=(557, 450), text_input="HARD", font=myfont, base_color=YELLOW, hovering_color=GREY)
+
+        BACK_BUTTON = Button(image=None, pos=(357, 650), text_input="GO BACK", font=myfont, base_color=WHITE, hovering_color=GREY)
+
+        screen.blit(OPTIONS_TEXT, (210, 10))
+        screen.blit(PLAYER_ONE_TEXT, (120, 100))
+        screen.blit(PLAYER_TWO_TEXT, (500, 100))
+
+        for button in [P1EASY_DIFFICULTY, P1MEDIUM_DIFFICULTY, P1HARD_DIFFICULTY, BACK_BUTTON, P2EASY_DIFFICULTY, P2MEDIUM_DIFFICULTY, P2HARD_DIFFICULTY]:
+            button.changeColor(MENU_MOUSE_POSITION)
+            button.update(screen)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if P1EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
+                    pass
+                if P1MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
+                    pass
+                if P1HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
+                    pass
+                if BACK_BUTTON.checkForInput(MENU_MOUSE_POSITION):
+                    main_menu()
+
+        pygame.display.update()
+
 
 def main_menu():
     pygame.display.set_caption("Main Menu")
     while True:
         
-        pygame.draw.rect(screen, BACKGROUND_COLOR, (0,0, width, SQUARESIZE))
-
         screen.fill(BACKGROUND_COLOR)
 
         MENU_MOUSE_POSITION = pygame.mouse.get_pos()
 
         MENU_TEXT = myfont.render("MAIN MENU", 1, WHITE)
 
-        PLAY_BUTTON = Button(image=None, pos=(350, 250), text_input="PLAY", font=myfont, base_color=WHITE, hovering_color=GREY)
-        OPTIONS_BUTTON = Button(image=None, pos=(350, 350), text_input="OPTIONS", font=myfont, base_color=WHITE, hovering_color=GREY)
-        QUIT_BUTTON = Button(image=None, pos=(350, 450), text_input="QUIT", font=myfont, base_color=WHITE, hovering_color=GREY)
+        PLAY_BUTTON = Button(image=None, pos=(357, 250), text_input="PLAY", font=myfont, base_color=WHITE, hovering_color=GREY)
+        OPTIONS_BUTTON = Button(image=None, pos=(357, 350), text_input="OPTIONS", font=myfont, base_color=WHITE, hovering_color=GREY)
+        QUIT_BUTTON = Button(image=None, pos=(357, 450), text_input="QUIT", font=myfont, base_color=WHITE, hovering_color=GREY)
 
-        screen.blit(MENU_TEXT, (170, 15))
+        screen.blit(MENU_TEXT, (187, 50))
 
         for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
             button.changeColor(MENU_MOUSE_POSITION)
