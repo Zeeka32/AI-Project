@@ -8,16 +8,11 @@ class Player:
     def set_algo(self, algo):
         self.algo = algo
 
-    def run_algo(self, board, turn):
-        return self.algo(board, turn)
+    def run_algo(self, board, turn, depth):
+        return self.algo(board, turn, depth)
     
 # implement your agent here
-
-def easy_ai(board, turn):
-    values = [50, 150, 250, 350, 450, 550, 650]
-    return random.choice(values)
-
-def medium_ai(board, turn):
+def connect4_ai(board, turn, depth):
     copyboard = [ [0]*7 for _ in range(6) ]
     for i in range(6):
         for j in range(7):
@@ -32,7 +27,7 @@ def medium_ai(board, turn):
                     copyboard[i][j] = 2
 
     c = [-1]
-    maxi(copyboard, 4, c)
+    maxi(copyboard, depth, c)
     values = [50, 150, 250, 350, 450, 550, 650]
     return values[c[0]]
 

@@ -8,6 +8,8 @@ from button import *
 ROWS = 6
 COLUMNS = 7
 SQUARESIZE = 100
+P1DIFFICULTY = 4
+P2DIFFICULTY = 4
 RADIUS = int(SQUARESIZE/2 - 5)
 
 # settings and variables
@@ -25,10 +27,10 @@ screen = pygame.display.set_mode(size)
 myfont = pygame.font.SysFont("impact", 80)
 
 p1 = Player()
-p1.set_algo(easy_ai)
+p1.set_algo(connect4_ai)
 
 p2 = Player()
-p2.set_algo(easy_ai)
+p2.set_algo(connect4_ai)
 
 
 def play():
@@ -54,7 +56,7 @@ def play():
 
         # Player one's Turn
         if turn == 0:
-            x_position = p1.run_algo(board, 1)
+            x_position = p1.run_algo(board, 1, P1DIFFICULTY)
             valid = update_game_state(board, SQUARESIZE, ROWS, 1, x_position)
             if valid:
                 game_over = check_game_state(board, ROWS, COLUMNS, 1, RED, myfont, "PLAYER 1 WINS!!", screen)
@@ -63,14 +65,14 @@ def play():
                 print_board(board)
                 draw_board(board, screen, ROWS, COLUMNS, SQUARESIZE, RADIUS, height)
 
-                pygame.time.wait(500)
+                pygame.time.wait(100)
 
         
         # Player two's turn
         # remove event.pos[0] and replace it with the right value based on the AI's choice
         # 50 for COL0, 150 for COL1, 250 for COL3 and so on..
         if turn == 1 and AI:
-            x_position = p2.run_algo(board, 2)
+            x_position = p2.run_algo(board, 2, P2DIFFICULTY)
             valid = update_game_state(board, SQUARESIZE, ROWS, 2, x_position)
             if valid:
                 game_over = check_game_state(board, ROWS, COLUMNS, 2, YELLOW, myfont, "PLAYER 2 WINS!!", screen)
@@ -79,10 +81,10 @@ def play():
                 print_board(board)
                 draw_board(board, screen, ROWS, COLUMNS, SQUARESIZE, RADIUS, height)
 
-                pygame.time.wait(500)
-
                 AI = False
-        
+
+                pygame.time.wait(100)
+
         if turn == 1:
             AI = True
         
@@ -92,6 +94,8 @@ def play():
 
 
 def options():
+    global P1DIFFICULTY
+    global P2DIFFICULTY
     pygame.display.set_caption("Options")
     while True:
 
@@ -126,17 +130,17 @@ def options():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if P1EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p1.set_algo(easy_ai)
+                    P1DIFFICULTY = 1
                 if P1MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p1.set_algo(medium_ai)
+                    P1DIFFICULTY = 3
                 if P1HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    pass
+                    P1DIFFICULTY = 5
                 if P2EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p2.set_algo(easy_ai)
+                    P2DIFFICULTY = 1
                 if P2MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p2.set_algo(medium_ai)
+                    P2DIFFICULTY = 3
                 if P2HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    pass
+                    P2DIFFICULTY = 5
                 if BACK_BUTTON.checkForInput(MENU_MOUSE_POSITION):
                     main_menu()
 
