@@ -126,15 +126,15 @@ def options():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if P1EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p1.set_algo(easy_ai, 1)
+                    p1.set_algo(easy_ai)
                 if P1MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    pass
+                    p1.set_algo(medium_ai)
                 if P1HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
                     pass
                 if P2EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p2.set_algo(easy_ai, 2)
+                    p2.set_algo(easy_ai)
                 if P2MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    pass
+                    p2.set_algo(medium_ai)
                 if P2HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
                     pass
                 if BACK_BUTTON.checkForInput(MENU_MOUSE_POSITION):

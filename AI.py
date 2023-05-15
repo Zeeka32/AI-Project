@@ -1,4 +1,5 @@
 from utilities import *
+import random
 
 class Player:
     def __init__(self):
@@ -11,7 +12,12 @@ class Player:
         return self.algo(board, turn)
     
 # implement your agent here
+
 def easy_ai(board, turn):
+    values = [50, 150, 250, 350, 450, 550, 650]
+    return random.choice(values)
+
+def medium_ai(board, turn):
     copyboard = [ [0]*7 for _ in range(6) ]
     for i in range(6):
         for j in range(7):
