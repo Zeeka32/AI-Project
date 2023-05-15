@@ -54,7 +54,7 @@ def play():
 
         # Player one's Turn
         if turn == 0:
-            x_position = p1.run_algo(board)
+            x_position = p1.run_algo(board, 1)
             valid = update_game_state(board, SQUARESIZE, ROWS, 1, x_position)
             if valid:
                 game_over = check_game_state(board, ROWS, COLUMNS, 1, RED, myfont, "PLAYER 1 WINS!!", screen)
@@ -70,7 +70,7 @@ def play():
         # remove event.pos[0] and replace it with the right value based on the AI's choice
         # 50 for COL0, 150 for COL1, 250 for COL3 and so on..
         if turn == 1 and AI:
-            x_position = p2.run_algo(board)
+            x_position = p2.run_algo(board, 2)
             valid = update_game_state(board, SQUARESIZE, ROWS, 2, x_position)
             if valid:
                 game_over = check_game_state(board, ROWS, COLUMNS, 2, YELLOW, myfont, "PLAYER 2 WINS!!", screen)
@@ -126,13 +126,13 @@ def options():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if P1EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p1.set_algo(easy_ai)
+                    p1.set_algo(easy_ai, 1)
                 if P1MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
                     pass
                 if P1HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
                     pass
                 if P2EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    p2.set_algo(easy_ai)
+                    p2.set_algo(easy_ai, 2)
                 if P2MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
                     pass
                 if P2HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
