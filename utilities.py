@@ -134,7 +134,7 @@ def get_score(board, i, j):
         for j in range(7):
             if board[i][j] == color:
                 sum+=get_score_core(board, i, j)
-    
+
     return sum
 
 def get_empty(board):

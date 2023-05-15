@@ -18,7 +18,7 @@ def connect4_ai(board, turn, depth):
         for j in range(7):
             copyboard[i][j] = int(board[i][j])
 
-    if turn == 1:
+    if turn == 2:
         for i in range(6):
             for j in range(7):
                 if copyboard[i][j] == 2:
@@ -39,7 +39,7 @@ def mini(board, depth):
 
     for i in range(7):
         if empty[i] != -1:
-            board[empty[i]][i] = 1
+            board[empty[i]][i] = 2
             isWin = is_win(board, empty[i], i)
             board[empty[i]][i] = 0
             if isWin:
@@ -50,15 +50,15 @@ def mini(board, depth):
     if depth == 0:
         for i in range(7):
             if empty[i] != -1:
-                board[empty[i]][i] = 1
-                minimmum = min(get_score(board, empty[i], i), minimmum)
+                board[empty[i]][i] = 2
+                minimmum = min(maxi(board, 0, [0]), minimmum)
                 board[empty[i]][i] = 0
         
         return minimmum
 
     for i in range(7):
         if empty[i] != -1:
-            board[empty[i]][i] = 1
+            board[empty[i]][i] = 2
             minimmum = min(maxi(board, depth-1, [0]), minimmum)
             board[empty[i]][i] = 0
     
@@ -73,7 +73,7 @@ def maxi(board, depth, c):
 
     for i in range(7):
         if empty[i] != -1:
-            board[empty[i]][i] = 2
+            board[empty[i]][i] = 1
             isWin = is_win(board, empty[i], i)
             board[empty[i]][i] = 0
             if isWin:
@@ -85,7 +85,7 @@ def maxi(board, depth, c):
     if depth == 0:
         for i in range(7):
             if empty[i] != -1:
-                board[empty[i]][i] = 2
+                board[empty[i]][i] = 1
                 maximmum = max(get_score(board, empty[i], i), maximmum)
                 board[empty[i]][i] = 0
 
@@ -94,7 +94,7 @@ def maxi(board, depth, c):
     for i in range(7):
         if empty[i] != -1:
             e = i
-            board[empty[i]][i] = 2
+            board[empty[i]][i] = 1
             d = mini(board, depth-1)
 
             if d == float('-inf') and c[0] == -1: c[0] = i
