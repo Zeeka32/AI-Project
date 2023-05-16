@@ -1,4 +1,4 @@
-
+from utilities import *
 class Player:
     def __init__(self):
         self.algo = None
@@ -6,8 +6,8 @@ class Player:
     def set_algo(self, algo):
         self.algo = algo
 
-    def run_algo(self, board):
-        return self.algo(board)
+    def run_algo(self, board, turn, depth):
+        return self.algo(board, turn, depth)
     
 # implement your agent here
 # implement your agent here

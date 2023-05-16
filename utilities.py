@@ -80,3 +80,72 @@ def draw_board(board, screen, rows, columns, square_size, radius, height):
             elif board[r][c] == 2: 
                 pygame.draw.circle(screen, YELLOW, (int(c*square_size+square_size/2), height-int(r*square_size+square_size/2)), radius)
     pygame.display.update()
+
+def horizon(board, color, i, j, v):
+    if j not in range(0, len(board[0])) or board[i][j] != color:
+        return 0
+    
+    return 1+horizon(board, color, i, j+v, v)
+
+def vertical(board, color, i, j, v):
+    if i not in range(0, len(board)) or board[i][j] != color:
+        return 0
+    
+    return 1+vertical(board, color, i+v, j, v)
+
+def diagonal(board, color, i, j, v, e):
+    if j not in range(0, len(board[0])) or i not in range(0, len(board)) or board[i][j] != color:
+        return 0
+    
+    return 1+diagonal(board, color, i+v, j+e, v, e)
+
+def is_win(board, i, j):
+    cons = max(horizon(board, board[i][j], i, j, -1) + horizon(board, board[i][j], i, j, 1),
+    vertical(board, board[i][j], i, j, -1) + vertical(board, board[i][j], i, j, 1),
+    diagonal(board, board[i][j], i, j, -1, 1) + diagonal(board, board[i][j], i, j, 1, -1),
+    diagonal(board, board[i][j], i, j, -1, -1) + diagonal(board, board[i][j], i, j, 1, 1)) - 1
+         
+    return True if cons == 4 else False
+
+def get_score_core(board, i, j):
+    l = [horizon(board, board[i][j], i, j, -1) + horizon(board, board[i][j], i, j, 1) - 1,
+    vertical(board, board[i][j], i, j, -1) + vertical(board, board[i][j], i, j, 1) - 1,
+    diagonal(board, board[i][j], i, j, -1, 1) + diagonal(board, board[i][j], i, j, 1, -1) - 1,
+    diagonal(board, board[i][j], i, j, -1, -1) + diagonal(board, board[i][j], i, j, 1, 1) - 1] 
+
+    two = 0
+    three = 0
+
+    for x in l:
+        if x == 2:
+            two += 1
+        elif x == 3:
+            three += 1
+
+    score = 4 if j == 3 else 0
+    score += two*2 + three*5
+
+    return score
+
+def get_score(board, i, j):
+    color = board[i][j]
+    sum = 0
+    for i in range(6):
+        for j in range(7):
+            if board[i][j] == color:
+                sum+=get_score_core(board, i, j)
+
+    return sum
+
+def get_empty(board):
+    empty = [-1]*7
+    for i in range(7):
+        for j in range(6):
+            if board[j][i] == 0:
+                empty[i] = j
+                break
+
+    return empty
+
+def is_draw(board):
+    return False if any(0 in row for row in board) else True
