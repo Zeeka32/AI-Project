@@ -93,7 +93,6 @@ def maxi(board, depth, c):
     
     for i in range(7):
         if empty[i] != -1:
-            e = i
             board[empty[i]][i] = 1
             d = mini(board, depth-1)
 
