@@ -66,7 +66,7 @@ def mini(board, depth):
 
 def maxi(board, depth, c):
     if is_draw(board):
-        c = -1
+        c[0] = -1
         return 0
     
     empty = get_empty(board)
