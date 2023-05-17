@@ -108,24 +108,7 @@ def is_win(board, i, j):
     return True if cons == 4 else False
 
 def get_score_core(board, i, j):
-    l = [horizon(board, board[i][j], i, j, -1) + horizon(board, board[i][j], i, j, 1) - 1,
-    vertical(board, board[i][j], i, j, -1) + vertical(board, board[i][j], i, j, 1) - 1,
-    diagonal(board, board[i][j], i, j, -1, 1) + diagonal(board, board[i][j], i, j, 1, -1) - 1,
-    diagonal(board, board[i][j], i, j, -1, -1) + diagonal(board, board[i][j], i, j, 1, 1) - 1] 
-
-    two = 0
-    three = 0
-
-    for x in l:
-        if x == 2:
-            two += 1
-        elif x == 3:
-            three += 1
-
-    score = 4 if j == 3 else 0
-    score += two*2 + three*5
-
-    return score
+    pass
 
 def get_score(board, i, j):
     color = board[i][j]

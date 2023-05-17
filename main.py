@@ -83,13 +83,13 @@ def play():
 
                 AI = False
 
-                pygame.time.wait(100)
+                pygame.time.wait(1000)
 
         if turn == 1:
             AI = True
         
         if game_over:
-            pygame.time.wait(3000)
+            pygame.time.wait(10000)
                     
 
 

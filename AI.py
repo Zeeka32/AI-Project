@@ -1,6 +1,7 @@
 from utilities import *
 import random
 
+
 class Player:
     def __init__(self):
         self.algo = None
@@ -10,10 +11,11 @@ class Player:
 
     def run_algo(self, board, turn, depth):
         return self.algo(board, turn, depth)
-    
+
+
 # implement your agent here
 def connect4_ai(board, turn, depth):
-    copyboard = [ [0]*7 for _ in range(6) ]
+    copyboard = [[0] * 7 for _ in range(6)]
     for i in range(6):
         for j in range(7):
             copyboard[i][j] = int(board[i][j])
@@ -27,14 +29,17 @@ def connect4_ai(board, turn, depth):
                     copyboard[i][j] = 2
 
     c = [-1]
-    maxi(copyboard, depth, c)
+    alpha = float('-inf')
+    beta = float('inf')
+    maxi(copyboard, depth, c, alpha, beta)
     values = [50, 150, 250, 350, 450, 550, 650]
     return values[c[0]]
 
-def mini(board, depth):
+
+def mini(board, depth, alpha, beta):
     if is_draw(board):
         return 0
-    
+
     empty = get_empty(board)
 
     for i in range(7):
@@ -51,24 +56,29 @@ def mini(board, depth):
         for i in range(7):
             if empty[i] != -1:
                 board[empty[i]][i] = 2
-                minimmum = min(maxi(board, 0, [0]), minimmum)
+                minimmum = min(maxi(board, 0, [0], alpha, beta), minimmum)
                 board[empty[i]][i] = 0
-        
+
         return minimmum
 
     for i in range(7):
         if empty[i] != -1:
             board[empty[i]][i] = 2
-            minimmum = min(maxi(board, depth-1, [0]), minimmum)
+            minimmum = min(maxi(board, depth - 1, [0], alpha, beta), minimmum)
             board[empty[i]][i] = 0
-    
-    return  minimmum
+            if alpha >= beta:
+                return minimmum
+            beta = min(alpha, minimmum)
 
-def maxi(board, depth, c):
+
+    return minimmum
+
+
+def maxi(board, depth, c, alpha, beta):
     if is_draw(board):
         c[0] = -1
         return 0
-    
+
     empty = get_empty(board)
 
     for i in range(7):
@@ -76,6 +86,7 @@ def maxi(board, depth, c):
             board[empty[i]][i] = 1
             isWin = is_win(board, empty[i], i)
             board[empty[i]][i] = 0
+
             if isWin:
                 c[0] = i
                 return float('inf')
@@ -90,19 +101,21 @@ def maxi(board, depth, c):
                 board[empty[i]][i] = 0
 
         return maximmum
-    
+
     for i in range(7):
         if empty[i] != -1:
             board[empty[i]][i] = 1
-            d = mini(board, depth-1)
+            d = mini(board, depth - 1, alpha, beta)
 
             if d == float('-inf') and c[0] == -1: c[0] = i
-
             if maximmum < d:
                 maximmum = d
                 c[0] = i
             board[empty[i]][i] = 0
-    
 
-    return  maximmum
+            if alpha >= beta:
+                return maximmum
+            alpha = max(alpha, maximmum)
 
+
+    return maximmum
