@@ -66,8 +66,8 @@ def mini(board, depth, alpha, beta):
             board[empty[i]][i] = 2
             minimmum = min(maxi(board, depth - 1, [0], alpha, beta), minimmum)
             board[empty[i]][i] = 0
-            if alpha >= beta:
-                return minimmum
+            # if alpha >= beta:
+            #     return minimmum
             beta = min(alpha, minimmum)
 
 
@@ -113,8 +113,8 @@ def maxi(board, depth, c, alpha, beta):
                 c[0] = i
             board[empty[i]][i] = 0
 
-            if alpha >= beta:
-                return maximmum
+            # if alpha >= beta:
+            #     return maximmum
             alpha = max(alpha, maximmum)
 
 
