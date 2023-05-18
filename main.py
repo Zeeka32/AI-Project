@@ -65,7 +65,6 @@ def play():
                 print_board(board)
                 draw_board(board, screen, ROWS, COLUMNS, SQUARESIZE, RADIUS, height)
 
-                pygame.time.wait(100)
 
         
         # Player two's turn
@@ -83,13 +82,12 @@ def play():
 
                 AI = False
 
-                pygame.time.wait(1000)
 
         if turn == 1:
             AI = True
         
         if game_over:
-            pygame.time.wait(10000)
+            pygame.time.wait(3000)
                     
 
 
@@ -130,17 +128,17 @@ def options():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if P1EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    P1DIFFICULTY = 1
+                    P1DIFFICULTY = 2
                 if P1MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
                     P1DIFFICULTY = 3
                 if P1HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    P1DIFFICULTY = 5
+                    P1DIFFICULTY = 6
                 if P2EASY_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    P2DIFFICULTY = 1
+                    P2DIFFICULTY = 2
                 if P2MEDIUM_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
                     P2DIFFICULTY = 3
                 if P2HARD_DIFFICULTY.checkForInput(MENU_MOUSE_POSITION):
-                    P2DIFFICULTY = 5
+                    P2DIFFICULTY = 6
                 if BACK_BUTTON.checkForInput(MENU_MOUSE_POSITION):
                     main_menu()
 
