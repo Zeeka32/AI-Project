@@ -140,3 +140,29 @@ def get_score_core(board, i, j):
     score += two * 2 + three * 5
 
     return score
+
+
+def get_score(board, i, j):
+    color = board[i][j]
+    sum = 0
+    for i in range(6):
+        for j in range(7):
+            if board[i][j] == color:
+                sum += get_score_core(board, i, j)
+
+    return sum
+
+
+def get_all_valid_placements(board):
+    empty = [-1] * 7
+    for i in range(7):
+        for j in range(6):
+            if board[j][i] == 0:
+                empty[i] = j
+                break
+
+    return empty
+
+
+def is_draw(board):
+    return False if any(0 in row for row in board) else True
