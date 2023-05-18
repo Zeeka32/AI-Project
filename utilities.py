@@ -149,7 +149,7 @@ def get_score(board, i, j):
     return sum
 
 
-def get_empty(board):
+def get_all_valid_placements(board):
     empty = [-1] * 7
     for i in range(7):
         for j in range(6):

@@ -36,7 +36,7 @@ def mini(board, depth, alpha, beta):
     if is_draw(board):
         return 0
 
-    empty = get_empty(board)
+    empty = get_all_valid_placements(board)
 
     for i in range(7):
         if empty[i] != -1:
@@ -81,7 +81,7 @@ def maxi(board, depth, c, alpha, beta):
         c[0] = -1
         return 0
 
-    empty = get_empty(board)
+    empty = get_all_valid_placements(board)
 
     for i in range(7):
         if empty[i] != -1:
@@ -151,7 +151,7 @@ def mini_no_pruning(board, depth):
     if is_draw(board):
         return 0
 
-    empty = get_empty(board)
+    empty = get_all_valid_placements(board)
 
     for i in range(7):
         if empty[i] != -1:
@@ -186,7 +186,7 @@ def maxi_no_pruning(board, depth, c):
         c[0] = -1
         return 0
 
-    empty = get_empty(board)
+    empty = get_all_valid_placements(board)
 
     for i in range(7):
         if empty[i] != -1:
