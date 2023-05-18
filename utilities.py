@@ -27,25 +27,25 @@ def winning_move(board, piece, rows, columns):
     for c in range(columns):
         for r in range(rows - 3):
             if board[r][c] == piece and board[r + 1][c] == piece and board[r + 2][c] == piece and board[r + 3][
-                c] == piece:
+                    c] == piece:
                 return True
 
     for c in range(columns - 3):
         for r in range(rows):
             if board[r][c] == piece and board[r][c + 1] == piece and board[r][c + 2] == piece and board[r][
-                c + 3] == piece:
+                    c + 3] == piece:
                 return True
 
     for c in range(columns - 3):
         for r in range(3, rows):
             if board[r][c] == piece and board[r - 1][c + 1] == piece and board[r - 2][c + 2] == piece and board[r - 3][
-                c + 3] == piece:
+                    c + 3] == piece:
                 return True
 
     for c in range(columns - 3):
         for r in range(rows - 3):
             if board[r][c] == piece and board[r + 1][c + 1] == piece and board[r + 2][c + 2] == piece and board[r + 3][
-                c + 3] == piece:
+                    c + 3] == piece:
                 return True
 
 
@@ -80,16 +80,16 @@ def draw_board(board, screen, rows, columns, square_size, radius, height):
             pygame.draw.rect(screen, BOARD_COLOR,
                              (c * square_size, r * square_size + square_size, square_size, square_size))
             pygame.draw.circle(screen, BACKGROUND_COLOR, (
-            int(c * square_size + square_size / 2), int(r * square_size + square_size + square_size / 2)), radius)
+                int(c * square_size + square_size / 2), int(r * square_size + square_size + square_size / 2)), radius)
 
     for c in range(columns):
         for r in range(rows):
             if board[r][c] == 1:
                 pygame.draw.circle(screen, RED, (
-                int(c * square_size + square_size / 2), height - int(r * square_size + square_size / 2)), radius)
+                    int(c * square_size + square_size / 2), height - int(r * square_size + square_size / 2)), radius)
             elif board[r][c] == 2:
                 pygame.draw.circle(screen, YELLOW, (
-                int(c * square_size + square_size / 2), height - int(r * square_size + square_size / 2)), radius)
+                    int(c * square_size + square_size / 2), height - int(r * square_size + square_size / 2)), radius)
     pygame.display.update()
 
 
@@ -116,8 +116,10 @@ def diagonal(board, color, i, j, v, e):
 
 def is_win(board, i, j):
     cons = max(horizon(board, board[i][j], i, j, -1) + horizon(board, board[i][j], i, j, 1),
-               vertical(board, board[i][j], i, j, -1) + vertical(board, board[i][j], i, j, 1),
-               diagonal(board, board[i][j], i, j, -1, 1) + diagonal(board, board[i][j], i, j, 1, -1),
+               vertical(board, board[i][j], i, j, -1) +
+               vertical(board, board[i][j], i, j, 1),
+               diagonal(board, board[i][j], i, j, -1, 1) +
+               diagonal(board, board[i][j], i, j, 1, -1),
                diagonal(board, board[i][j], i, j, -1, -1) + diagonal(board, board[i][j], i, j, 1, 1)) - 1
 
     return True if cons == 4 else False
@@ -125,8 +127,10 @@ def is_win(board, i, j):
 
 def get_score_core(board, i, j):
     l = [horizon(board, board[i][j], i, j, -1) + horizon(board, board[i][j], i, j, 1) - 1,
-         vertical(board, board[i][j], i, j, -1) + vertical(board, board[i][j], i, j, 1) - 1,
-         diagonal(board, board[i][j], i, j, -1, 1) + diagonal(board, board[i][j], i, j, 1, -1) - 1,
+         vertical(board, board[i][j], i, j, -1) +
+         vertical(board, board[i][j], i, j, 1) - 1,
+         diagonal(board, board[i][j], i, j, -1, 1) +
+         diagonal(board, board[i][j], i, j, 1, -1) - 1,
          diagonal(board, board[i][j], i, j, -1, -1) + diagonal(board, board[i][j], i, j, 1, 1) - 1]
 
     two = l.count(2)
@@ -136,29 +140,3 @@ def get_score_core(board, i, j):
     score += two * 2 + three * 5
 
     return score
-
-
-def get_score(board, i, j):
-    color = board[i][j]
-    sum = 0
-    for i in range(6):
-        for j in range(7):
-            if board[i][j] == color:
-                sum += get_score_core(board, i, j)
-
-    return sum
-
-
-def get_all_valid_placements(board):
-    empty = [-1] * 7
-    for i in range(7):
-        for j in range(6):
-            if board[j][i] == 0:
-                empty[i] = j
-                break
-
-    return empty
-
-
-def is_draw(board):
-    return False if any(0 in row for row in board) else True
