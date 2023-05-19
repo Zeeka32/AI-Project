@@ -5,6 +5,13 @@ def connect4_ai(board, turn, depth):
 
     copyboard = board.copy()
 
+    for i in range(6):
+        for j in range(7):
+            copyboard[i][j] = board[5 - i][j]
+        
+
+    print(copyboard)
+
     if turn == 2:
         for i in range(6):
             for j in range(7):
@@ -65,6 +72,7 @@ def mini(board, depth, alpha, beta):
 
 
 def maxi(board, depth, c, alpha, beta):
+
     if is_draw(board):
         c[0] = -1
         return 0
