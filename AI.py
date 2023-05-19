@@ -99,6 +99,7 @@ def maxi(board, depth, c, alpha, beta):
                 board[empty[i]][i] = 0
 
                 #alpha beta pruning
+                
                 alpha = max(alpha, maximmum)
                 if alpha >= beta:
                     return maximmum
@@ -116,7 +117,8 @@ def maxi(board, depth, c, alpha, beta):
                 c[0] = i
             board[empty[i]][i] = 0
 
-            #alpha beta pruning
+           #alpha beta pruning
+            
             alpha = max(alpha, maximmum)
             if alpha >= beta:
                 return maximmum
