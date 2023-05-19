@@ -69,6 +69,7 @@ diffLabel.pack()
 diff_var = StringVar()
 
 radio_button11 = Radiobutton(root, text="Easy", variable=diff_var, value=2, command=handle_diff_selection)
+# radio buttons for difficulty
 radio_button22 = Radiobutton(root, text="Medium", variable=diff_var, value=4, command=handle_diff_selection)
 radio_button32 = Radiobutton(root, text="Hard", variable=diff_var, value=6, command=handle_diff_selection)
 
