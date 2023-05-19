@@ -70,6 +70,7 @@ def mini(board, depth, alpha, beta):
 
     return minimmum
 
+# radio buttons for difficulty
 
 def maxi(board, depth, c, alpha, beta):
 
