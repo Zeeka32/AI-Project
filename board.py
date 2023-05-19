@@ -43,9 +43,10 @@ class Board:
         cordArr = []
         for i in range(0, 7):
             for j in range(0, 6):
-                x = startCord[0] + i * 115
-                y = startCord[1] + j * 112
+                x = startCord[0] + i * (BOTTOM - TOP) * 0.1659259259259259259259259259259
+                y = startCord[1] + j * (RIGHT - LEFT) * 0.1474358974358974358974358974359
                 cordArr.append((x, y))
+
         return cordArr
 
     def _transpose_grid(self, grid):
@@ -69,7 +70,7 @@ class Board:
     def _get_grid(self):
         cropedImage = self._capture_image()
         pixels = self._convert_image_to_grid(cropedImage)
-        cropedImage.show()
+        # cropedImage.show()
         grid = self._transpose_grid(pixels)
         return grid
 
@@ -88,7 +89,13 @@ class Board:
         return (self.board, is_game_end)
 
     def select_column(self, column):
-        pyautogui.click(
-            self._get_grid_cordinates()[column][1] + LEFT,
-            self._get_grid_cordinates()[column][0] + TOP,
-        )
+
+        x = self._get_grid_cordinates()[column][1] + LEFT
+        y = self._get_grid_cordinates()[column][0] + TOP
+
+        print(x - LEFT, y - TOP)
+        if column == 6:
+            x = RIGHT - RIGHT * 0.05
+            y = LEFT + 50
+
+        pyautogui.click(x, y)

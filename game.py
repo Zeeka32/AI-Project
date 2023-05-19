@@ -16,13 +16,14 @@ def main():
 
         # FOR DEBUG PURPOSES
         board.print_grid(game_board)
+        print("\n")
 
         # YOUR CODE GOES HERE
 
         # Insert here the action you want to perform based on the output of the algorithm
         # You can use the following function to select a column
         random_column = random.randint(0, 6)
-        board.select_column(random_column)
+        board.select_column(6)
 
         time.sleep(2)
 
