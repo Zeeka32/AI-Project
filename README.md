@@ -2,8 +2,8 @@
 This project is part of Faculty of Computers and Arificial Intelligence's AI project.
 ## Required Dependencies
 
-1. numpy
-2. pygame
+1. Numpy
+2. Tkinter
 
 ## Usage
-From the setting menu, choose the difficulty of either Player 1 or Player 2, then go back and hit play
+Choose Algorithm type, and difficulty (depth of AI), then open website: http://kevinshannon.com/connect4/ and hit run
